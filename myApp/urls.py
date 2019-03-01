@@ -6,6 +6,9 @@ urlpatterns = [
     path('<int:num>/',views.detail),
     path('grades/',views.grades),
     path('students/', views.students),
+    path('students1', views.students1),
+    path('stu/<int:page>/', views.students2),
+    path('studentsearch', views.studentsearch),
     path('grades/<int:id>/', views.gradeStudents),
     path('addstudent/', views.addStudent),
 ]

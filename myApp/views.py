@@ -3,9 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from .models import Students,Grades
-
+from django.db.models import Max,F
 
 def index(request):
+    g = Grades.objects.filter(gboynum__gt=F('ggirlnum'))
+    print(g)
     return HttpResponse('sunck is a good man!')
 
 
@@ -23,6 +25,20 @@ def students(request):
     studentsList = Students.stuObj.all()
     return render(request, 'myApp/students.html', {'students': studentsList})
 
+def students1(request):
+    studentsList = Students.stuObj.all()[0:2]
+    return render(request, 'myApp/students.html', {'students': studentsList})
+
+
+def students2(request, page):
+    studentsList = Students.stuObj.all()[(page-1)*2:page*2]
+    return render(request, 'myApp/students.html', {'students': studentsList})
+
+
+def studentsearch(request):
+    maxAge = Students.stuObj.aggregate(Max('sage'))
+    print(maxAge)
+    return HttpResponse('1111')
 
 def gradeStudents(request, id):
     grade = Grades.objects.get(pk=id)

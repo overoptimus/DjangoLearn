@@ -20,10 +20,21 @@ class Grades(models.Model):
         ordering = []
 '''
 
+
 class StudentsManager(models.Manager):
 
     def get_queryset(self):
         return super(StudentsManager, self).get_queryset().filter(isDelete=False)
+
+    def createStudent(self, name, gender, age, condent, grade, isD=False):
+        stu = self.model()
+        stu.sname = name
+        stu.sgender = gender
+        stu.sage = age
+        stu.scondent = condent
+        stu.sgrade = grade
+        return stu
+
 
 class Students(models.Model):
     stuObj = StudentsManager()
