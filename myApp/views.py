@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from .models import Students,Grades
-from django.db.models import Max,F
+from django.db.models import Max,F,Q
+import sys
 
 def index(request):
     g = Grades.objects.filter(gboynum__gt=F('ggirlnum'))
@@ -38,6 +39,11 @@ def students2(request, page):
 def studentsearch(request):
     maxAge = Students.stuObj.aggregate(Max('sage'))
     print(maxAge)
+    studentsList = Students.stuObj.filter(Q(pk__lte=2) | Q(sage__gt=50))
+    print(studentsList)
+    # 学生描述中带有薛艳梅的学生所在班级的集合
+    gradesList = Grades.objects.filter(students__scondent__contains='薛艳梅')
+    print(gradesList)
     return HttpResponse('1111')
 
 def gradeStudents(request, id):
@@ -52,3 +58,41 @@ def addStudent(request):
     stu = Students.createStudent("刘德华", True, 30, "我是刘德华", grade)
     stu.save()
     return HttpResponse('111')
+
+def attribles(request):
+    print(request.path)
+    print(request.method)
+    print(request.encoding)
+    print(request.GET)
+    print(request.POST)
+    print(request.FILES)
+    print(request.COOKIES)
+    print(request.session)
+    return HttpResponse('123123123123123')
+
+def get1(request):
+    a = request.GET.get('a')
+    b = request.GET['b']
+    c = request.GET.get('c')
+    return HttpResponse(a +  "     "  + b + "   " + c)
+
+def get2(request):
+    aList = request.GET.getlist('a')
+    a1 = aList[0]
+    a2 = aList[1]
+    b = request.GET.get('c')
+    return HttpResponse(str(a1) + "   " + str(a2) + "   " + str(b))
+
+def showregist(request):
+    return render(request, 'myApp/regist.html')
+
+def regist(request):
+    name = request.POST.get('name')
+    gender = request.POST.get('gender')
+    age = request.POST.get('age')
+    hobbyList = request.POST.getlist('hobby')
+    print(name)
+    print(gender)
+    print(age)
+    print(hobbyList)
+    return HttpResponse('post')
