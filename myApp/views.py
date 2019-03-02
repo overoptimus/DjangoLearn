@@ -96,3 +96,10 @@ def regist(request):
     print(age)
     print(hobbyList)
     return HttpResponse('post')
+
+def showresponse(request):
+    res = HttpResponse(content=b'dawdafawdadadw')
+    print(res.content)
+    print(res.charset)
+    print(res.status_code)
+    return res

@@ -15,5 +15,6 @@ urlpatterns = [
     path('get1/', views.get1),
     path('get2/', views.get2),
     path('showregist/', views.showregist),
-    path('regist/', views.regist)
+    path('regist/', views.regist),
+    path('showresponse/', views.showresponse)
 ]
