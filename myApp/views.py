@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from .models import Students,Grades
 from django.db.models import Max,F,Q
 import sys
@@ -11,6 +11,8 @@ def index(request):
     print(g)
     return HttpResponse('sunck is a good man!')
 
+def index1(request):
+    return HttpResponseRedirect('/sunck')
 
 def detail(request, num, num2):
     return HttpResponse('detail-%s-%s' %(num,num2))
@@ -103,3 +105,38 @@ def showresponse(request):
     print(res.charset)
     print(res.status_code)
     return res
+
+def cookietest(request):
+    res = HttpResponse()
+    # res.set_cookie('sunck', value='good', max_age=None, expires=None, path='/', domain=None, secure=False, httponly=False, samesite=None)
+    cookies = request.COOKIES
+    res.write('<h1>' + cookies['sunck'] + '</h1>')
+    return res
+
+def redirect1(request):
+    # return HttpResponseRedirect('/sunck/redirect2/')
+    return redirect('/sunck/redirect2')
+def redirect2(request):
+    return HttpResponse(content='我是重定向之后的页面')
+
+
+#session
+def main(request):
+    username = request.session.get('name', '游客')
+    return render(request, 'myApp/main.html', {'username': username})
+
+def login(request):
+    return render(request, 'myApp/login.html')
+
+def showmain(request):
+    username = request.POST.get('username')
+    request.session['name'] = username
+    return redirect('/sunck/main/')
+
+from django.contrib.auth import logout
+def quit(request):
+    # 清除session
+    logout(request)
+    # request.session.clear()
+    # request.session.flush()
+    return redirect('/sunck/main/')
