@@ -136,7 +136,26 @@ def showmain(request):
 from django.contrib.auth import logout
 def quit(request):
     # 清除session
+    # 推荐使用logout()
     logout(request)
     # request.session.clear()
     # request.session.flush()
     return redirect('/sunck/main/')
+
+
+def good(request):
+    return HttpResponse(content='good')
+
+def zhuye(request):
+    return render(request, 'myApp/index.html')
+
+def detail(request):
+    return render(request, 'myApp/detail.html')
+
+def postfile(request):
+    return render(request, 'myApp/postfile.html')
+
+def showname(request):
+    user = request.POST.get('username')
+    pwd = request.POST.get('passwd')
+    return render(request, 'myApp/showname.html', {'username': user, 'passwd': pwd})

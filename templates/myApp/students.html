@@ -5,12 +5,15 @@
     <title>学生信息</title>
   </head>
   <body>
+    <a href="{% url "app:good"  %}">链接</a>
     <h1>学生信息列表</h1>
     <ul>
       {%for student in students%}
       <li>
-        <a href="#">{{student.sname}}--{{student.scondent}}</a>
+        <a href="#">{{forloop.counter}}--{{student.sname}}--{{student.scondent}}</a>
       </li>
+      {% empty %}
+      <li>当前没有学生</li>
       {%endfor%}
     </ul>
   </body>
