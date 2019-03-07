@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form class="" action="{% url 'app:checkverifycode' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="verifycode" value="">
+      <img src="{% url 'app:verifycode' %}" alt="">
+      <input type="submit" name="" value="登陆">
+      <span>{{flag}}</span>
+    </form>
+  </body>
+</html>

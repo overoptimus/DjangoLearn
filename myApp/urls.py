@@ -30,5 +30,8 @@ urlpatterns = [
     path('zhuye/', views.zhuye),
     path('detail/', views.detail),
     path('postfile/', views.postfile),
-    path('showname/', views.showname, name='showname')
+    path('showname/', views.showname, name='showname'),
+    path('verifycode/', views.verifyCode, name='verifycode'),
+    path('checkverifycode', views.checkverifycode, name='checkverifycode'),
+    path('verifycodefile/', views.verifycodefile)
 ]
