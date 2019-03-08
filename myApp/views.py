@@ -232,6 +232,7 @@ from django.conf import settings
 def savefile(request):
     if request.method == 'POST':
         f = request.FILES['file']
+        # 合成文件在服务器端的路径
         filepath = os.path.join(settings.MEDIA_ROOT, f.name)
         with open(filepath, 'wb') as fp:
             for info in f.chunks():
@@ -239,3 +240,27 @@ def savefile(request):
         return HttpResponse(content='上传成功')
     else:
         return HttpResponse(content='上传失败')
+
+from django.core.paginator import Paginator
+def studentspage(request, pageId):
+    allList = Students.stuObj.all()
+    paginator = Paginator(allList, 2)
+    page = paginator.page(pageId)
+    return render(request, 'myApp/studentspage.html', {'students': page})
+
+def ajaxstudents(request):
+    return render(request, 'myApp/ajaxstudents.html')
+
+
+from django.http import JsonResponse
+def studentsinfo(request):
+    stus = Students.stuObj.all()
+    print(type(stus))
+    list = []
+    for stu in stus:
+        list.append([stu.sname, stu.sage])
+    return JsonResponse({"students": list})
+
+
+def edit(request):
+    return render(request, 'myApp/edit.html')

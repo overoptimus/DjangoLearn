@@ -36,4 +36,8 @@ urlpatterns = [
     path('verifycodefile/', views.verifycodefile),
     path('upfile/', views.upfile),
     path('savefile/', views.savefile, name='savefile'),
+    path('studentspage/<int:pageId>/', views.studentspage, name='studentspage'),
+    path('ajaxstudents/', views.ajaxstudents),
+    path('studentsinfo/', views.studentsinfo),
+    path('edit/', views.edit),
 ]

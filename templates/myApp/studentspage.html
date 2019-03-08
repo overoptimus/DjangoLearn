@@ -1,0 +1,29 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>学生分页显示</title>
+    <link rel="stylesheet" href="{% static 'myApp/css/menu.css' %}">
+  </head>
+  <body>
+    <ul>
+      {% for stu in students %}
+      <li>{{stu.sname}}--{{stu.sgrade}}</li>
+      {% endfor %}
+    </ul>
+
+    <ul id="menu">
+      {% for index in students.paginator.page_range %}
+      {% if index == students.number %}
+      <li>{{index}}</li>
+      {% else %}
+      <li>
+        <a href="{% url 'app:studentspage' index %}">{{index}}</a>
+      </li>
+      {% endif %}
+
+      {% endfor %}
+    </ul>
+  </body>
+</html>

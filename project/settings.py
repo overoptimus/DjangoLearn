@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myApp',
+    'tinymce',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +133,17 @@ STATICFILES_DIRS = [
 # 上传文件路径
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upfile')
 
+# 富文本
+TINYMCE_DEFAUTL_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}
+
+import djcelery
+djcelery.setup_loader() # 初始化
+BROKER_URL = 'redis://:747471945@127.0.0.1:6379/0'
+CELERY_IMPORT = ('myApp.task')
 
 # SESSION_ENGINE='redis_sessions.session'
 # SESSION_REDIS_HOST = 'localhost'

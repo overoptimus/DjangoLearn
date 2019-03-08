@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from myApp.models import Grades,Students
+from myApp.models import Grades,Students,Text
 
 
 class StudentsInfo(admin.TabularInline):
@@ -76,3 +76,6 @@ class StudentsAdmin(admin.ModelAdmin):
 
 
 #admin.site.register(Students, StudentsAdmin)
+
+
+admin.site.register(Text)
