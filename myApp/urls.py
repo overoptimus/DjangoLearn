@@ -33,5 +33,7 @@ urlpatterns = [
     path('showname/', views.showname, name='showname'),
     path('verifycode/', views.verifyCode, name='verifycode'),
     path('checkverifycode', views.checkverifycode, name='checkverifycode'),
-    path('verifycodefile/', views.verifycodefile)
+    path('verifycodefile/', views.verifycodefile),
+    path('upfile/', views.upfile),
+    path('savefile/', views.savefile, name='savefile'),
 ]

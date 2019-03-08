@@ -221,3 +221,21 @@ def verifycodefile(request):
         str1 = '请重新输入'
     request.session.clear()
     return render(request, 'myApp/verifycodefile.html', {'flag': str1})
+
+def upfile(request):
+    return render(request, 'myApp/upfile.html')
+
+
+import os
+from django.conf import settings
+
+def savefile(request):
+    if request.method == 'POST':
+        f = request.FILES['file']
+        filepath = os.path.join(settings.MEDIA_ROOT, f.name)
+        with open(filepath, 'wb') as fp:
+            for info in f.chunks():
+                fp.write(info)
+        return HttpResponse(content='上传成功')
+    else:
+        return HttpResponse(content='上传失败')

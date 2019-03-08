@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.myApp.myMiddle.myMiddle',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -126,6 +127,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# 上传文件路径
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upfile')
+
 
 # SESSION_ENGINE='redis_sessions.session'
 # SESSION_REDIS_HOST = 'localhost'
