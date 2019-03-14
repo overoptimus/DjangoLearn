@@ -40,4 +40,5 @@ urlpatterns = [
     path('ajaxstudents/', views.ajaxstudents),
     path('studentsinfo/', views.studentsinfo),
     path('edit/', views.edit),
+    path('celerytest/', views.celerytest),
 ]

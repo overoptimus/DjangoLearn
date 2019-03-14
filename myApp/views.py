@@ -264,3 +264,9 @@ def studentsinfo(request):
 
 def edit(request):
     return render(request, 'myApp/edit.html')
+
+import time
+from .task import task1
+def celerytest(request):
+    task1.delay()
+    return render(request, 'myApp/celeryTest.html')
